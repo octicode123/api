@@ -1,7 +1,6 @@
-// In api/routes/login.js
-
 const express = require('express');
 const router = express.Router();
+const jwt = require('jsonwebtoken');
 const mysql = require('mysql2/promise');
 
 // Database configuration
@@ -11,6 +10,9 @@ const dbConfig = {
   password: '',
   database: 'aProjet'
 };
+
+// JWT secret key
+const JWT_SECRET = process.env.JWT_SECRET;
 
 router.post('/', async (req, res, next) => {
   console.log('Request body:', req.body);
@@ -33,9 +35,16 @@ router.post('/', async (req, res, next) => {
 
     if (rows.length > 0) {
       // User found
+      const token = jwt.sign(
+        { email: rows[0].email },
+        JWT_SECRET,
+        { expiresIn: '1h' }
+      );
+
       res.status(200).json({
         message: 'Login successful!',
-        user: { email: rows[0].email }
+        user: { email: rows[0].email },
+        token: token
       });
     } else {
       // User not found

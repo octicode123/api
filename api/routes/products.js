@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 const path = require('path');
-
+const authCheck =require('../../midlleware/auth-check');
 // Configure multer for file storage
 const storage = multer.diskStorage({
   destination: function(req, file, cb) {
@@ -26,11 +26,11 @@ const upload = multer({
   storage: storage,
   fileFilter: fileFilter,
   limits: {
-    fileSize: 1024 * 1024 * 5 
+    fileSize: 1024 * 1024 * 5 // 5 MB limit
   }
 });
 
-router.get('/', (req, res, next) => {
+router.get('/',authCheck, (req, res, next) => {
   res.status(200).json({
     message: 'handling get request /products'
   });
