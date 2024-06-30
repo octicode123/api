@@ -1,0 +1,27 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/octicode123/api.git"
+  },
+  "author": "api",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/octicode123/api/issues"
+  },
+  "homepage": "https://github.com/octicode123/api#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "morgan": "^1.10.0",
+    "mysql2": "^3.10.1",
+    "nodemon": "^3.1.4"
+  }
+}
